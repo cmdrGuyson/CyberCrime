@@ -50,6 +50,12 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("typeOfUser", "user");
                 response.sendRedirect("home-user.jsp");
                 break;
+            case "pending-user":
+                request.getRequestDispatcher("util/pending-account.jsp").include(request, response);
+                break;
+            case "inactive-user":
+                request.getRequestDispatcher("util/account-deactivated.jsp").include(request, response);
+                break;
             default:
                 request.getRequestDispatcher("util/no-account.jsp").include(request, response);
         }

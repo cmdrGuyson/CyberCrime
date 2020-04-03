@@ -32,6 +32,22 @@
         <servlet-name>UpdateUserStatusController</servlet-name>
         <servlet-class>Controller.UpdateUserStatusController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewAcceptedReportsController</servlet-name>
+        <servlet-class>Controller.ViewAcceptedReportsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddressReportController</servlet-name>
+        <servlet-class>Controller.AddressReportController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMyAddressedReportsController</servlet-name>
+        <servlet-class>Controller.ViewMyAddressedReportsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMyReportsController</servlet-name>
+        <servlet-class>Controller.ViewMyReportsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/RegisterController</url-pattern>
@@ -63,6 +79,22 @@
     <servlet-mapping>
         <servlet-name>UpdateUserStatusController</servlet-name>
         <url-pattern>/UpdateUserStatusController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewAcceptedReportsController</servlet-name>
+        <url-pattern>/ViewAcceptedReportsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddressReportController</servlet-name>
+        <url-pattern>/AddressReportController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyAddressedReportsController</servlet-name>
+        <url-pattern>/ViewMyAddressedReportsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMyReportsController</servlet-name>
+        <url-pattern>/ViewMyReportsController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

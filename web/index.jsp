@@ -49,9 +49,9 @@
                     Search
                 </button>
             </form>
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+            <a class="btn btn-outline-primary my-2 my-sm-0" href="#">
                 View All Reports
-            </button>
+            </a>
         </nav>
 
         <!--Content-->
@@ -93,7 +93,6 @@
                             <button class="btn btn-md btn-primary btn-block" type="submit">
                                 Sign in
                             </button>
-                            <br />
                             <p class="mt-5 mb-3 text-muted">
                                 Don't have an account? <a href="register.jsp">Register!</a>
                             </p>

@@ -49,6 +49,26 @@ public class Report {
         this.reportedDate = reportedDate;
     }
 
+    /* When Addressing Complaint */
+    public Report(int reportID, String status, String response, String handledOfficer) {
+        this.reportID = reportID;
+        this.status = status;
+        this.response = response;
+        this.handledOfficer = handledOfficer;
+    }
+    
+    /* Retrieving Reports by a specific user */
+    public Report(int reportID, String description, String typeOfCrime, String status, String response, String handledOfficer, String estimatedDateOfCrime, String reportedDate) {
+        this.reportID = reportID;
+        this.description = description;
+        this.typeOfCrime = typeOfCrime;
+        this.status = status;
+        this.response = response;
+        this.handledOfficer = handledOfficer;
+        this.estimatedDateOfCrime = estimatedDateOfCrime;
+        this.reportedDate = reportedDate;
+    }
+    
     public int getReportID() {
         return reportID;
     }

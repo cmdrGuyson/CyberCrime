@@ -52,12 +52,12 @@
                 </button>
             </form>
             <a href="report-crime.jsp" class="btn btn-outline-danger my-2 my-sm-0" role="button">Report Crime</a>
-            <a href="#" data-toggle="tooltip" title="Notifications"
-               ><i class="fas fa-bell fa-lg"></i
-                ></a>
-            <a href="LogoutController" data-toggle="tooltip" title="Sign out"
-               ><i class="fas fa-sign-out-alt fa-lg"></i
-                ></a>
+            <a class="btn btn-outline-primary my-2 my-sm-0" href="ViewMyReportsController">
+                View My Reports
+            </a>
+            <a href="LogoutController" data-toggle="tooltip" title="Sign out">
+                <i class="fas fa-sign-out-alt fa-lg"></i>
+            </a>
         </nav>
 
         <!--Content-->

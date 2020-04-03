@@ -120,12 +120,12 @@
                                     <td>${report.getDescription()}</td>
                                     <td>${report.getStatus()}</td>
                                     <td>
-                                        <a href="${accept}" data-toggle="tooltip" title="Accept"
-                                           ><i class="fas fa-check-circle"></i
-                                            ></a>
-                                        <a href="${decline}" data-toggle="tooltip" title="Decline"
-                                           ><i class="fas fa-ban"></i
-                                            ></a>
+                                        <a href="${accept}" data-toggle="tooltip" title="Accept">
+                                            <i class="fas fa-check-circle"></i>
+                                        </a>
+                                        <a href="${decline}" data-toggle="tooltip" title="Decline">
+                                            <i class="fas fa-ban"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -134,9 +134,8 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <%@ include file="util/footer.html" %>
+        <%@ include file="util/footer.html" %>
 
-</body>
+    </body>
 </html>

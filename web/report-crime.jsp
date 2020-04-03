@@ -59,6 +59,12 @@
                     >
                     Report Crime
                 </button>
+                <a class="btn btn-outline-primary my-2 my-sm-0" href="ViewMyReportsController">
+                    View My Reports
+                </a>
+                <a href="LogoutController" data-toggle="tooltip" title="Sign out">
+                    <i class="fas fa-sign-out-alt fa-lg"></i>
+                </a>
             </nav>
 
             <!--Content-->

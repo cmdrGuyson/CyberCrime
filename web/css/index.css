@@ -158,3 +158,35 @@ body {
 .successfullyCreatedReport {
   background-color: #ffffff;
 }
+
+.modal-lg {
+    padding: 10px;
+}
+
+.accessDeniedText {
+  text-align: center;
+  background-color: #7a7b7b;
+  padding-top: 10px;
+  border: solid 1px #7a7b7b;
+  border-radius: 5px;
+  font-weight: 400;
+  color: #fbfbfb;
+}
+
+.accessDenied {
+  background-color: #ffe712;
+}
+
+.sameAccountText {
+  text-align: center;
+  background-color: #a4a7a7;
+  padding-top: 10px;
+  border: solid 1px #a4a7a7;
+  border-radius: 5px;
+  font-weight: 400;
+  color: #fbfbfb;
+}
+
+.container-table {
+    max-width: max-content;
+}

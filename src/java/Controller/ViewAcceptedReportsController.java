@@ -3,6 +3,7 @@ package Controller;
 import Model.HandleReport;
 import Model.Report;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,13 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ViewPendingReportsController extends HttpServlet {
+public class ViewAcceptedReportsController extends HttpServlet {
 
-    @Override
+@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        viewPendingReports(request, response);
+        viewAcceptedReports(request, response);
 
     }
 
@@ -30,16 +31,15 @@ public class ViewPendingReportsController extends HttpServlet {
         return "Short description";
     }
 
-    private void viewPendingReports(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void viewAcceptedReports(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HandleReport handleReport = new HandleReport();
 
-        List<Report> pendingReports = handleReport.getReports("Pending");
+        List<Report> acceptedReports = handleReport.getReports("In-progress");
 
-        request.setAttribute("pendingReports", pendingReports);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("admin-dashboard.jsp");
+        request.setAttribute("acceptedReports", acceptedReports);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("officer-dashboard.jsp");
         dispatcher.forward(request, response);
 
     }
-
 }

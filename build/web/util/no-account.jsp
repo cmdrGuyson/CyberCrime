@@ -27,14 +27,11 @@
                         <img src="images/no-account.gif" height="400" />
                     </div>
                 </div>
-                <div class="col-sm-12 col-md-12 col-xs-12 centerAlign">
+                <div class="col-sm-12 col-md-12 col-xs-12 accessDeniedText">
                     <h2 class="whiteText boldText">
                         Oops! You entered invalid credentials...
                     </h2>
-                </div>
-                <div class="col-sm-12 col-md-12 col-xs-12 centerAlign"> &nbsp; </div>
-                <div class="col-sm-12 col-md-12 col-xs-12 centerAlign">
-                    <p> <a href="index.jsp" class="whiteText"> Click here to sign in </a> </p>
+                     <p> <a href="index.jsp" class="whiteText"> Click here to sign in </a> </p>
                 </div>
             </div>
         </div>
