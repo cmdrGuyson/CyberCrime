@@ -1,6 +1,6 @@
 <%-- 
-    Document   : officer-my-reports
-    Created on : Apr 2, 2020, 11:57:45 PM
+    Document   : searched-reports
+    Created on : Apr 4, 2020, 2:46:35 PM
     Author     : Ebisu
 --%>
 
@@ -11,7 +11,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>CyberCrime | Dashboard</title>
+        <title>CyberCrime | Search Reports</title>
         <script
             src="https://kit.fontawesome.com/b9bf971455.js"
             crossorigin="anonymous"
@@ -25,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="icon" href="images/hacker.png" />
     </head>
+
     <body>
         <!--Navigation Bar-->
 
@@ -32,39 +33,17 @@
             <a class="navbar-brand" href="#">
                 <img src="images/hacker.png" width="40" height="40" alt="" />
             </a>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="home-officer.jsp"
-                       >Home</a
-                    >
-                    <a class="nav-item nav-link" href="ViewPublishedReportsController">Published Reports</a>
-                    <a class="nav-item nav-link" href="#">Contact</a>
-                </div>
-            </div>
             <%@ include file="util/search-form.jsp" %>
-            <button
-                class="btn btn-outline-danger my-2 my-sm-0 disabled"
-                type="submit"
-                >
-                Dashboard
+            <button class="btn btn-outline-primary my-2 my-sm-0" disabled>
+                View All Reports
             </button>
-            <a href="LogoutController" data-toggle="tooltip" title="Sign out">
-                <i class="fas fa-sign-out-alt fa-lg"></i>
-            </a>
         </nav>
 
         <!--Content-->
 
 
         <div class="container content container-table">
-            <h6 class="display-4">My Addressed Reports</h6>
-            <br />
-
-            <a
-                class="btn btn-outline-warning my-2 my-sm-0" href="ViewAcceptedReportsController"
-                >
-                Reports to be addressed
-            </a>
+            <h6 class="display-4">Published Reports</h6>
 
             <br /><br />
 
@@ -75,11 +54,8 @@
                     <thead class="thead-dark">
                         <tr>
                             <th scope="col">Report ID</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Full Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Date Of Crime</th>
-                            <th scope="col">Reported Date</th>
+                            <th scope="col" width="6%">Date Of Crime</th>
+                            <th scope="col" width="6%">Reported Date</th>
                             <th scope="col">Type</th>
                             <th scope="col">Description</th>
                             <th scope="col">Response</th>
@@ -87,20 +63,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="report" items="${addressedReports}">
+                        <c:forEach var="report" items="${reports}">
 
                             <tr>
 
                                 <th scope="row">${report.getReportID()}</th>
-                                <td>${report.getUsername()}</td>
-                                <td>${report.getFullName()}</td>
-                                <td>${report.getEmail()}</td>
                                 <td>${report.getEstimatedDateOfCrime()}</td>
                                 <td>${report.getReportedDate()}</td>
                                 <td>${report.getTypeOfCrime()}</td>
                                 <td>${report.getDescription()}</td>
                                 <td>${report.getResponse()}</td>
-                                <td>${report.getStatus()}</td>
+                                <td><b>${report.getStatus()}<b/></td>
 
                             </tr>
 

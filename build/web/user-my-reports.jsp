@@ -38,21 +38,11 @@
                     <a class="nav-item nav-link" href="home-user.jsp"
                        >Home</a
                     >
-                    <a class="nav-item nav-link" href="#">Published Reports</a>
+                    <a class="nav-item nav-link" href="ViewPublishedReportsController">Published Reports</a>
                     <a class="nav-item nav-link" href="#">Contact</a>
                 </div>
             </div>
-            <form class="form-inline">
-                <input
-                    class="form-control mr-sm-2"
-                    type="search"
-                    placeholder="Search for report"
-                    aria-label="Search"
-                    />
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                    Search
-                </button>
-            </form>
+            <%@ include file="util/search-form.jsp" %>
             <a href="report-crime.jsp" class="btn btn-outline-danger my-2 my-sm-0" role="button">Report Crime</a>
             <button class="btn btn-outline-primary my-2 my-sm-0" disabled href="#">
                 View My Reports

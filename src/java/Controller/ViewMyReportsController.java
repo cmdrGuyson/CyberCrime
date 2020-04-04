@@ -38,8 +38,6 @@ public class ViewMyReportsController extends HttpServlet {
         HttpSession session = request.getSession();
 
         List<Report> myReports = handleReport.getMyReports((String) session.getAttribute("username"));
-
-        System.out.println(myReports.size());
         
         request.setAttribute("myReports", myReports);
         RequestDispatcher dispatcher = request.getRequestDispatcher("user-my-reports.jsp");

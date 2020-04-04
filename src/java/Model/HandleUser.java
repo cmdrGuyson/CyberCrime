@@ -4,6 +4,7 @@ import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationExceptio
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +70,7 @@ public class HandleUser {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
@@ -90,7 +91,7 @@ public class HandleUser {
                 User user = new User(results.getString("username"), results.getString("email"), results.getString("firstName"), results.getString("lastName"), results.getString("status"), results.getString("dateRegistered"));
                 pendingUsers.add(user);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
@@ -108,7 +109,7 @@ public class HandleUser {
             
             statement.executeUpdate();
             
-        }catch(Exception e){
+        }catch(SQLException e){
             System.out.println(e);
         }   
         

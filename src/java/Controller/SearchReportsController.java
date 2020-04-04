@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ViewAcceptedReportsController extends HttpServlet {
+public class SearchReportsController extends HttpServlet {
 
-@Override
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        viewAcceptedReports(request, response);
-
+        
+        searchReports(request, response);
+        
     }
 
     @Override
@@ -30,15 +30,14 @@ public class ViewAcceptedReportsController extends HttpServlet {
         return "Short description";
     }
 
-    private void viewAcceptedReports(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void searchReports(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HandleReport handleReport = new HandleReport();
 
-        List<Report> acceptedReports = handleReport.getReports("In-progress");
-
-        request.setAttribute("acceptedReports", acceptedReports);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("officer-dashboard.jsp");
+        List<Report> reports = handleReport.searchReports(request.getParameter("searchString"));
+        
+        request.setAttribute("reports", reports);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("searched-reports.jsp");
         dispatcher.forward(request, response);
-
-    }
+    }   
 }

@@ -2,7 +2,7 @@ package Controller;
 
 import Model.HandleUser;
 import Model.User;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.io.IOException;
 import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
@@ -47,7 +47,7 @@ public class RegisterController extends HttpServlet {
             User user = new User(username, email, password, firstName, lastName);
             handleUser.registerUser(user);
 
-        } catch (Exception e) {
+        } catch (MySQLIntegrityConstraintViolationException e) {
 
             System.out.println(e);
             RequestDispatcher dispatcher = request.getRequestDispatcher("util/same-account.jsp");

@@ -31,7 +31,7 @@
                     <h2 class="whiteText boldText">
                         Oops! Looks like you already have an account...
                     </h2>
-                    <p> <a href="index.html" class="whiteText"> Click here to sign in </a> </p>
+                    <p> <a href="index.jsp" class="whiteText"> Click here to sign in </a> </p>
                 </div>
             </div>
         </div>

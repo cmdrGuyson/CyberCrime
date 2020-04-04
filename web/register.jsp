@@ -35,20 +35,10 @@
                     <a class="nav-item nav-link" href="#">Contact</a>
                 </div>
             </div>
-            <form class="form-inline">
-                <input
-                    class="form-control mr-sm-2"
-                    type="search"
-                    placeholder="Search for report"
-                    aria-label="Search"
-                    />
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-                    Search
-                </button>
-            </form>
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
+            <%@ include file="util/search-form.jsp" %>
+            <a class="btn btn-outline-primary my-2 my-sm-0" href="ViewPublishedReportsController">
                 View All Reports
-            </button>
+            </a>
         </nav>
 
         <!--Content-->

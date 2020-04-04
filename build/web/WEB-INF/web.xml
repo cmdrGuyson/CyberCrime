@@ -48,6 +48,14 @@
         <servlet-name>ViewMyReportsController</servlet-name>
         <servlet-class>Controller.ViewMyReportsController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewPublishedReportsController</servlet-name>
+        <servlet-class>Controller.ViewPublishedReportsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchReportsController</servlet-name>
+        <servlet-class>Controller.SearchReportsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/RegisterController</url-pattern>
@@ -95,6 +103,14 @@
     <servlet-mapping>
         <servlet-name>ViewMyReportsController</servlet-name>
         <url-pattern>/ViewMyReportsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewPublishedReportsController</servlet-name>
+        <url-pattern>/ViewPublishedReportsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchReportsController</servlet-name>
+        <url-pattern>/SearchReportsController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

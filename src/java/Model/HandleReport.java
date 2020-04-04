@@ -3,8 +3,13 @@ package Model;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import static java.util.Comparator.comparingInt;
 import java.util.List;
+import java.util.TreeSet;
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toCollection;
 
 public class HandleReport {
 
@@ -15,7 +20,8 @@ public class HandleReport {
         connection = Database_Connection.connectToDatabase();
     }
 
-    public void addComplaint(Report report) {
+    /* WHEN ADDING A REPORT */
+    public void addReport(Report report) {
 
         try {
 
@@ -30,7 +36,7 @@ public class HandleReport {
 
             statement.execute();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
@@ -59,7 +65,7 @@ public class HandleReport {
 
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return reports;
@@ -89,7 +95,7 @@ public class HandleReport {
 
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return reports;
@@ -112,12 +118,36 @@ public class HandleReport {
 
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
         return reports;
     }
 
+    /* GET PUBLISHED REPORTS */
+    public List<Report> getPublishedReports() {
+
+        List<Report> reports = new ArrayList<>();
+
+        try {
+
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM report WHERE status IN ('Insufficient Data', 'Recovered');");
+            ResultSet results = statement.executeQuery();
+
+            while (results.next()) {
+                Report report = new Report(results.getInt("reportID"), results.getString("description"), results.getString("typeOfCrime"), results.getString("status"), results.getString("response"), results.getString("handledOfficer"), results.getString("estimatedDateOfCrime"), results.getString("reportedDate"));
+                reports.add(report);
+
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return reports;
+    }
+
+    /* WHEN REPORT STATUS IS CHANGED */
     public void changeStatus(String reportID, String status) {
 
         try {
@@ -129,11 +159,12 @@ public class HandleReport {
 
             statement.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
 
+    /* WHEN OFFICER ADDRESSES A REPORT */
     public void addressReport(Report report) {
 
         try {
@@ -147,8 +178,66 @@ public class HandleReport {
 
             statement.executeUpdate();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
+    }
+
+    /* SEARCHING FOR REPORTS USING USER ENTERED SEARCH STRING */
+    public List<Report> searchReports(String searchString) {
+
+        List<Report> reports = new ArrayList<>();
+
+        //searchString is broken into keywords by whitespaces.
+        String[] keywords = searchString.trim().split("\\s+");
+
+        //creating a REGEXP that can be used to query.
+        String searchExpression = String.join("|", keywords);
+
+        try {
+
+            //Searching through description
+            PreparedStatement statementA = connection.prepareStatement("SELECT * FROM report WHERE description REGEXP ? AND status IN ('Insufficient Data', 'Recovered');");
+            statementA.setString(1, searchExpression);
+
+            ResultSet resultsA = statementA.executeQuery();
+
+            while (resultsA.next()) {
+                Report report = new Report(resultsA.getInt("reportID"), resultsA.getString("description"), resultsA.getString("typeOfCrime"), resultsA.getString("status"), resultsA.getString("response"), resultsA.getString("handledOfficer"), resultsA.getString("estimatedDateOfCrime"), resultsA.getString("reportedDate"));
+                reports.add(report);
+            }
+
+            //Searching through typeOfCrime
+            PreparedStatement statementB = connection.prepareStatement("SELECT * FROM report WHERE typeOfCrime REGEXP ? AND status IN ('Insufficient Data', 'Recovered');");
+            statementB.setString(1, searchExpression);
+
+            ResultSet resultsB = statementB.executeQuery();
+
+            while (resultsB.next()) {
+                Report report = new Report(resultsB.getInt("reportID"), resultsB.getString("description"), resultsB.getString("typeOfCrime"), resultsB.getString("status"), resultsB.getString("response"), resultsB.getString("handledOfficer"), resultsB.getString("estimatedDateOfCrime"), resultsB.getString("reportedDate"));
+                reports.add(report);
+            }
+
+            //Searching through response
+            PreparedStatement statementC = connection.prepareStatement("SELECT * FROM report WHERE response REGEXP ? AND status IN ('Insufficient Data', 'Recovered');");
+            statementC.setString(1, searchExpression);
+
+            ResultSet resultsC = statementC.executeQuery();
+
+            while (resultsC.next()) {
+                Report report = new Report(resultsC.getInt("reportID"), resultsC.getString("description"), resultsC.getString("typeOfCrime"), resultsC.getString("status"), resultsC.getString("response"), resultsC.getString("handledOfficer"), resultsC.getString("estimatedDateOfCrime"), resultsC.getString("reportedDate"));
+                reports.add(report);
+            }
+
+            //Removing duplicates from list
+            List<Report> unique = reports.stream().collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparingInt(Report::getReportID))), ArrayList::new));
+
+            reports = unique;
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return reports;
     }
 }

@@ -25,11 +25,11 @@ public class AddReportController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        addComplaint(request, response);
+        addReport(request, response);
         
     }
     
-    private void addComplaint(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void addReport(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
         HttpSession session = request.getSession();
                 
@@ -42,7 +42,7 @@ public class AddReportController extends HttpServlet {
         
         Report report = new Report(description, typeOfCrime, username, estimatedDateOfCrime);
         
-        handleReport.addComplaint(report);
+        handleReport.addReport(report);
         
         RequestDispatcher dispatcher = request.getRequestDispatcher("util/successful-report.jsp");
         dispatcher.forward(request, response);
