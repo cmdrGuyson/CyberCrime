@@ -35,7 +35,7 @@
                     <a class="nav-item nav-link active" href="#"
                        >Home<span class="sr-only">(current)</span></a
                     >
-                    <a class="nav-item nav-link" href="#">Contact</a>
+                    <a class="nav-item nav-link" href="contact-us.jsp">Contact</a>
                 </div>
             </div>
             <%@ include file="util/search-form.jsp" %>

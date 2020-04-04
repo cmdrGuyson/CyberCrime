@@ -43,7 +43,7 @@
 
 
         <div class="container content container-table">
-            <h6 class="display-4">Published Reports</h6>
+            <h6 class="display-4">Search Results</h6>
 
             <br /><br />
 
