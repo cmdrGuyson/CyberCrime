@@ -25,6 +25,14 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="icon" href="images/hacker.png" />
     </head>
+    
+    <%
+        String type = (String) request.getSession().getAttribute("typeOfUser");
+
+        if (type == "officer") {
+
+    %>
+    
     <body>
         <!--Navigation Bar-->
 
@@ -168,7 +176,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                        </div>
 
                         </c:forEach>
                         </tbody>
@@ -180,4 +188,12 @@
         <%@ include file="util/footer.html" %>
 
     </body>
+    
+    <%    } else {
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("util/access-denied.jsp");
+            dispatcher.forward(request, response);
+        }
+    %>
+    
 </html>

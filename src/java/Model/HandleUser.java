@@ -36,8 +36,9 @@ public class HandleUser {
             statement.execute();
 
         } catch (MySQLIntegrityConstraintViolationException e) {
+            System.out.println(e);
             throw e;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }

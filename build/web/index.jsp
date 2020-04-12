@@ -23,8 +23,19 @@
 
         <title>CyberCrime | Login</title>
     </head>
+
+    <%
+        String type = (String) request.getSession().getAttribute("typeOfUser");
+
+        if (type == null) {
+
+    %>
+
     <body>
         <!--Navigation Bar-->
+
+
+
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">
@@ -140,7 +151,18 @@
             </div>
         </div>
 
+
+
         <%@ include file="util/footer.html" %>
 
     </body>
+
+    <%    } else {
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("util/access-denied.jsp");
+            dispatcher.forward(request, response);
+        }
+    %>
+
 </html>
+
