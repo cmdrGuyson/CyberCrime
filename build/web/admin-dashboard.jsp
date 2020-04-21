@@ -80,6 +80,7 @@
             <!--Table-->
             <div class="row dash-row">
                 <div class="container-dash">
+                    
                     <table class="table table-striped">
                         <thead class="thead-dark">
                             <tr>
@@ -94,8 +95,11 @@
                                 <th width="10%" scope="col">Status</th>
                             </tr>
                         </thead>
+                        
                         <tbody>
+                            
                             <c:forEach var="report" items="${pendingReports}">
+                            
 
                                 <c:url var="accept" value="UpdateReportStatusController">
                                     <c:param name="status" value="In-progress"/> 

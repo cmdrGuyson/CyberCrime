@@ -56,6 +56,10 @@
         <servlet-name>SearchReportsController</servlet-name>
         <servlet-class>Controller.SearchReportsController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendHomeController</servlet-name>
+        <servlet-class>Controller.SendHomeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
         <url-pattern>/RegisterController</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>SearchReportsController</servlet-name>
         <url-pattern>/SearchReportsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendHomeController</servlet-name>
+        <url-pattern>/SendHomeController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

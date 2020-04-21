@@ -31,7 +31,7 @@
         <!--Navigation Bar-->
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="SendHomeController">
                 <img src="images/hacker.png" width="40" height="40" alt="" />
             </a>
             <%@ include file="util/search-form.jsp" %>

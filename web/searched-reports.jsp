@@ -30,13 +30,13 @@
         <!--Navigation Bar-->
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="SendHomeController">
                 <img src="images/hacker.png" width="40" height="40" alt="" />
             </a>
             <%@ include file="util/search-form.jsp" %>
-            <button class="btn btn-outline-primary my-2 my-sm-0" disabled>
+            <a class="btn btn-outline-primary my-2 my-sm-0" href="ViewPublishedReportsController">
                 View All Reports
-            </button>
+            </a>
         </nav>
 
         <!--Content-->

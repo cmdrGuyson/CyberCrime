@@ -25,14 +25,14 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="icon" href="images/hacker.png" />
     </head>
-    
+
     <%
         String type = (String) request.getSession().getAttribute("typeOfUser");
 
         if (type == "officer") {
 
     %>
-    
+
     <body>
         <!--Navigation Bar-->
 
@@ -93,8 +93,10 @@
                             <th width="10%" scope="col">Status</th>
                         </tr>
                     </thead>
+
                     <tbody>
                         <c:forEach var="report" items="${acceptedReports}">
+
 
                             <tr>
                                 <th scope="row">${report.getReportID()}</th>
@@ -107,93 +109,104 @@
                                 <td>${report.getDescription()}</td>
                                 <td>${report.getStatus()}</td>
                                 <td>
-                                    <a href="" data-toggle="modal" data-target="#addressReportModal">
+                                    <a href="" data-toggle="modal" data-target="#addressReportModal" onclick="change(${report.getReportID()})">
                                         <i class="fas fa-bars"></i>
                                     </a>
                                 </td>
                             </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
 
-                        <div
-                            class="modal fade"
-                            id="addressReportModal"
-                            tabindex="-1"
-                            role="dialog"
-                            aria-labelledby="addressReportModalLabel"
-                            aria-hidden="true"
-                            >
-                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLongTitle">
-                                            Address Report
-                                        </h5>
-                                        <button
-                                            type="button"
-                                            class="close"
-                                            data-dismiss="modal"
-                                            aria-label="Close"
-                                            >
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                <!-- Modal to address report -->
+                <div
+                    class="modal fade"
+                    id="addressReportModal"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="addressReportModalLabel"
+                    aria-hidden="true"
+                    >
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">
+                                    Address Report
+                                </h5>
+                                <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-label="Close"
+                                    >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <form method="POST" action="AddressReportController">
+                                    <div class="form-row">
+                                        <input type="hidden" name="reportID" id="reportIDmodal"/>
+                                        <label for="response">Response</label>
+                                        <textarea
+                                            class="form-control"
+                                            id="responseTextArea"
+                                            rows="5"
+                                            placeholder="Please provide a short response to how the report was addressed."
+                                            name="response"
+                                            required
+                                            maxlength="255"
+                                            ></textarea>
                                     </div>
-                                    <div class="modal-body">
-                                        <form method="POST" action="AddressReportController">
-                                            <div class="form-row">
-                                                <input type="hidden" name="reportID" value="${report.getReportID()}">
-                                                <label for="response">Response</label>
-                                                <textarea
-                                                    class="form-control"
-                                                    id="responseTextArea"
-                                                    rows="5"
-                                                    placeholder="Please provide a short response to how the report was addressed."
-                                                    name="response"
-                                                    required
-                                                    ></textarea>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <label for="inputStatus">Status</label>
-                                                    <select id="inputStatus" class="form-control" name="status">
-                                                        <option selected>In-progress</option>
-                                                        <option>Recovered</option>
-                                                        <option>Insufficient Data</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <hr />
-                                            <br />
-                                            <button
-                                                type="button"
-                                                class="btn btn-secondary"
-                                                data-dismiss="modal"
-                                                >
-                                                Close
-                                            </button>
-                                            <button class="btn btn-primary" type="submit" value="submit">
-                                                Address Report
-                                            </button>
-                                        </form>
+                                    <div class="form-row">
+                                        <div class="col">
+                                            <label for="inputStatus">Status</label>
+                                            <select id="inputStatus" class="form-control" name="status">
+                                                <option selected>In-progress</option>
+                                                <option>Recovered</option>
+                                                <option>Insufficient Data</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
+
+                                    <hr />
+                                    <br />
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        Close
+                                    </button>
+                                    <button class="btn btn-primary" type="submit" value="submit">
+                                        Address Report
+                                    </button>
+                                </form>
                             </div>
                         </div>
+                    </div>
+                </div>
 
-                        </c:forEach>
-                        </tbody>
-                </table>
+
             </div>
         </div>
-
 
         <%@ include file="util/footer.html" %>
 
     </body>
+
     
+    <!-- This script will change the report ID inserted into the modal when the modal is called -->
+    <script>
+        function change(value) {
+            console.log(value);
+            document.getElementById("reportIDmodal").value = value;
+        }
+
+    </script>
+
+
     <%    } else {
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("util/access-denied.jsp");
             dispatcher.forward(request, response);
         }
     %>
-    
+
 </html>
