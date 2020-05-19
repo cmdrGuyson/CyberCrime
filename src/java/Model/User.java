@@ -17,11 +17,14 @@ public class User {
         this.typeOfUser = "user";
         this.status = "Pending";
         
+        /* Create a date formatter to convert java data to SQL friendly date */
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
+        /* Set date registered date to the present date */
         this.dateRegistered = formatter.format(new Date());
     }
      
+    /*During login procedure*/
     public User(String username, String password) {
         this.username = username;
         this.password = password;

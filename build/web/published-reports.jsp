@@ -47,9 +47,9 @@
 
             <br /><br />
 
-            <!--Table-->
-
             <div class="container-dash">
+                
+                <!--Table to display published reports-->
                 <table class="table table-striped">
                     <thead class="thead-dark">
                         <tr>
@@ -63,6 +63,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        
+                        <!-- For each report make a new row in the table -->
                         <c:forEach var="report" items="${publishedReports}">
 
                             <tr>

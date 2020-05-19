@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/* Servelt to manage change of user status */
 public class UpdateUserStatusController extends HttpServlet {
 
     @Override
@@ -30,6 +31,8 @@ public class UpdateUserStatusController extends HttpServlet {
 
         HandleUser handleUser = new HandleUser();
         handleUser.changeStatus(request.getParameter("username"), request.getParameter("status"));
+        
+        //After changing status of specific user, Pending users list is displayed again.
         RequestDispatcher dispatcher = request.getRequestDispatcher("ViewPendingUsersController");
         dispatcher.forward(request, response);
     }

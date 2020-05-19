@@ -66,6 +66,23 @@
 
         <div class="container content">
             <h6 class="display-4">Reports to be Addressed</h6>
+            
+            <br />
+
+            <form class="form-inline" method="GET" action="SearchAcceptedReportsController">
+                <input
+                    class="form-control mr-sm-2"
+                    type="search"
+                    placeholder="Search for report"
+                    aria-label="Search"
+                    name="searchString"
+                    required
+                    />
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                    Search
+                </button>
+            </form>
+
             <br />
 
             <a
@@ -76,9 +93,8 @@
 
             <br /><br />
 
-            <!--Table-->
-
             <div class="container-dash">
+                <!--Table to display pending reports-->
                 <table class="table table-striped">
                     <thead class="thead-dark">
                         <tr>
@@ -96,7 +112,6 @@
 
                     <tbody>
                         <c:forEach var="report" items="${acceptedReports}">
-
 
                             <tr>
                                 <th scope="row">${report.getReportID()}</th>
@@ -183,7 +198,6 @@
                     </div>
                 </div>
 
-
             </div>
         </div>
 
@@ -191,7 +205,7 @@
 
     </body>
 
-    
+
     <!-- This script will change the report ID inserted into the modal when the modal is called -->
     <script>
         function change(value) {

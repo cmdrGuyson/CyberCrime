@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/* Servlet to handle login procedure */
 public class LoginController extends HttpServlet {
 
     @Override
@@ -20,6 +21,7 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        //Create user object from user entered data
         User user = new User(request.getParameter("username"), request.getParameter("password"));
 
         HandleUser handleUser = new HandleUser();
@@ -27,7 +29,10 @@ public class LoginController extends HttpServlet {
         String accountType = null;
 
         try {
+            
+            //Authenticate user by using handleUser object.
             accountType = handleUser.authenticateUser(user);
+            
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -37,6 +42,8 @@ public class LoginController extends HttpServlet {
         session.setAttribute("username", user.getUsername());
         
         switch (accountType) {
+            
+            //Assign attributes to session and redirect to respective home pages
             
             case "admin":
                 session.setAttribute("typeOfUser", "admin");
@@ -59,7 +66,6 @@ public class LoginController extends HttpServlet {
             default:
                 request.getRequestDispatcher("util/no-account.jsp").include(request, response);
         }
-
     }
 
     @Override

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/* Servlet to display officer's own addressed complaints */
 public class ViewMyAddressedReportsController extends HttpServlet {
 
     @Override
@@ -37,12 +38,15 @@ public class ViewMyAddressedReportsController extends HttpServlet {
         
         HttpSession session = request.getSession();
 
+        // Getting the logged in officers addressed reports using his username from session data
         List<Report> addressedReports = handleReport.getMyAddressedReports((String) session.getAttribute("username"));
 
+        // Set reports taken as request attributes
         request.setAttribute("addressedReports", addressedReports);
+        
+        // forward the request to officer-my-reports.jsp page
         RequestDispatcher dispatcher = request.getRequestDispatcher("officer-my-reports.jsp");
         dispatcher.forward(request, response);
 
     }
-    
 }

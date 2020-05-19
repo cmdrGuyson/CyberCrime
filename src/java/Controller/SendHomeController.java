@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/* This servlet directs users to their respective homepage depending on session data. */
 public class SendHomeController extends HttpServlet {
 
     @Override
@@ -14,9 +15,11 @@ public class SendHomeController extends HttpServlet {
 
         String accountType = null;
 
+        // Session attribute of typeOfUser is taken and checked if user is logged in
         if (request.getSession().getAttribute("typeOfUser") != null) {
             accountType = (String) request.getSession().getAttribute("typeOfUser");
 
+            //User is directed to their respective home page
             switch (accountType) {
                 case "admin":
                     response.sendRedirect("home-admin.jsp");
@@ -30,6 +33,7 @@ public class SendHomeController extends HttpServlet {
             }
 
         } else {
+            //If user is not logged in, they are directed to default home page
             response.sendRedirect("index.jsp");
         }
 

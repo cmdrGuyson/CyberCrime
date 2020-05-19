@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controller;
 
 import Model.HandleReport;
@@ -13,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/* Servlet to update report status */
 public class UpdateReportStatusController extends HttpServlet {
 
     @Override
@@ -34,7 +30,11 @@ public class UpdateReportStatusController extends HttpServlet {
     private void updateReportStatus(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HandleReport handleReport = new HandleReport();
+        
+        //Get data from request and call changeStatus() function
         handleReport.changeStatus(request.getParameter("reportID"), request.getParameter("status"));
+        
+        //After changing status display other pending reports
         RequestDispatcher dispatcher = request.getRequestDispatcher("ViewPendingReportsController");
         dispatcher.forward(request, response);
     }

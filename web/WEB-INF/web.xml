@@ -1,5 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>Controller.AdminFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <servlet-name>UpdateUserStatusController</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <servlet-name>ViewPendingUsersController</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <servlet-name>ViewPendingReportsController</servlet-name>
+    </filter-mapping>
+    <filter>
+        <filter-name>OfficerFilter</filter-name>
+        <filter-class>Controller.OfficerFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>OfficerFilter</filter-name>
+        <servlet-name>AddressReportsController</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>OfficerFilter</filter-name>
+        <servlet-name>SearchAcceptedReportsController</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>OfficerFilter</filter-name>
+        <servlet-name>ViewMyAddressedReportsController</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>OfficerFilter</filter-name>
+        <servlet-name>ViewAcceptedReportsController</servlet-name>
+    </filter-mapping>
+    <filter>
+        <filter-name>UserFilter</filter-name>
+        <filter-class>Controller.UserFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <servlet-name>ViewMyReportsController</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UserFilter</filter-name>
+        <servlet-name>AddReportController</servlet-name>
+    </filter-mapping>
     <servlet>
         <servlet-name>RegisterController</servlet-name>
         <servlet-class>Controller.RegisterController</servlet-class>
@@ -59,6 +107,10 @@
     <servlet>
         <servlet-name>SendHomeController</servlet-name>
         <servlet-class>Controller.SendHomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SearchAcceptedReportsController</servlet-name>
+        <servlet-class>Controller.SearchAcceptedReportsController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>
@@ -120,6 +172,10 @@
         <servlet-name>SendHomeController</servlet-name>
         <url-pattern>/SendHomeController</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SearchAcceptedReportsController</servlet-name>
+        <url-pattern>/SearchAcceptedReportsController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -131,5 +187,9 @@
     <error-page>
         <error-code>404</error-code>
         <location>/util/404.html</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/util/access-denied.jsp</location>
     </error-page>
 </web-app>

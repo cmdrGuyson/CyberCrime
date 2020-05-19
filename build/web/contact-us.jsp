@@ -70,6 +70,7 @@
             </div>
         </div>
         
+        <!-- Including the footer -->
         <%@ include file="util/footer.html" %>
 
     </body>

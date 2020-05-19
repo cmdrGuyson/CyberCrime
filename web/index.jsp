@@ -24,6 +24,8 @@
         <title>CyberCrime | Login</title>
     </head>
 
+    <!-- Only show the page if user is a general user (not registered) -->
+
     <%
         String type = (String) request.getSession().getAttribute("typeOfUser");
 
@@ -32,11 +34,8 @@
     %>
 
     <body>
+
         <!--Navigation Bar-->
-
-
-
-
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">
                 <img src="images/hacker.png" width="40" height="40" alt="" />
@@ -65,11 +64,13 @@
                 </div>
                 <div class="col-sm">
                     <br /><br />
+                    
+                    <!-- Login Form -->
                     <form class="form-signin" method="POST" action="LoginController">
                         <h4 class="h4 mb-3 font-weight-normal">Sign in</h4>
                         <br />
                         <div class="text-center">
-                            <label for="inputEmail" class="sr-only">Username</label>
+                            <label for="inputUsername" class="sr-only">Username</label>
                             <input
                                 type="username"
                                 id="inputUsername"
@@ -151,15 +152,16 @@
             </div>
         </div>
 
-
-
+        <!-- The footer is inserted here -->
         <%@ include file="util/footer.html" %>
 
     </body>
 
+    <!-- If user is logged in they cannot access this page, they will be redirected to their own home page -->
+
     <%    } else {
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("util/access-denied.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("SendHomeController");
             dispatcher.forward(request, response);
         }
     %>

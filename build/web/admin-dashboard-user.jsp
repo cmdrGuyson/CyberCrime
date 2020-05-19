@@ -23,6 +23,7 @@
             crossorigin="anonymous"
             />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
+        <link rel="stylesheet" type="text/css" href="css/additional.css" />
         <link rel="icon" href="images/hacker.png" />
     </head>
 
@@ -77,7 +78,7 @@
             <br /><br />
 
 
-            <!--Table-->
+            <!--Table to display users-->
             <div class="row dash-row">
                 <div class="container-dash">
                     <table class="table table-striped">
@@ -88,11 +89,11 @@
                                 <th scope="col">Last Name</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Registered Date</th>
-                                <th scope="col">Reported Date</th>
                                 <th scope="col">Status</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <!--For each user add a new row to the table-->
                             <c:forEach var="user" items="${pendingUsers}">
 
                                 <c:url var="accept" value="UpdateUserStatusController">
@@ -100,6 +101,7 @@
                                     <c:param name="username" value="${user.getUsername()}"/>
                                 </c:url>
 
+                                <!--Username of user stored in request parameter-->
                                 <c:url var="decline" value="UpdateUserStatusController">
                                     <c:param name="status" value="Inactive"/> 
                                     <c:param name="username" value="${user.getUsername()}"/>

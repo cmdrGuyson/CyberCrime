@@ -75,10 +75,10 @@
             </a>
 
             <br /><br />
-
-            <!--Table-->
-
+            
             <div class="container-dash">
+                
+                <!--Table to display reports-->
                 <table class="table table-striped">
                     <thead class="thead-dark">
                         <tr>
@@ -95,10 +95,10 @@
                         </tr>
                     </thead>
                     <tbody>
+                        
+                        <!--For each report add a new row to the table -->
                         <c:forEach var="report" items="${addressedReports}">
-
                             <tr>
-
                                 <th scope="row">${report.getReportID()}</th>
                                 <td>${report.getUsername()}</td>
                                 <td>${report.getFullName()}</td>
@@ -109,10 +109,9 @@
                                 <td>${report.getDescription()}</td>
                                 <td>${report.getResponse()}</td>
                                 <td>${report.getStatus()}</td>
-
                             </tr>
-
                         </c:forEach>
+                            
                     </tbody>
                 </table>
             </div>

@@ -10,14 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ViewPublishedReportsController extends HttpServlet {
+/* Servlet to handle the procedure of searching for reports to address */
+public class SearchAcceptedReportsController extends HttpServlet {
 
-    @Override
+@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        viewPublishedReports(request, response);
-        
+
+        searchAcceptedReports(request, response);
+
     }
 
     @Override
@@ -30,14 +31,18 @@ public class ViewPublishedReportsController extends HttpServlet {
         return "Short description";
     }
 
-    private void viewPublishedReports(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void searchAcceptedReports(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HandleReport handleReport = new HandleReport();
-
-        List<Report> publishedReports = handleReport.getPublishedReports();
         
-        request.setAttribute("publishedReports", publishedReports);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("published-reports.jsp");
+        /*call searchReportsOfficer() method on handle report using user entered search string and get
+        list of reports*/
+        List<Report> reports = handleReport.searchReportsOfficer(request.getParameter("searchString"));
+
+        //set the list of reports obtained as request's attributes and forwarded to officer-dashboard.jsp
+        request.setAttribute("acceptedReports", reports);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("officer-dashboard.jsp");
         dispatcher.forward(request, response);
+
     }
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/* Servlet used to landle logout procedure (This servlet is executed upon logout button click) */
 public class LogoutController extends HttpServlet {
 
     @Override
@@ -14,8 +15,10 @@ public class LogoutController extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
+        //Session is invalidated (user is logged out)
         session.invalidate();
 
+        //user is then sent to default home page
         request.getRequestDispatcher("index.jsp").include(request, response);
     }
 

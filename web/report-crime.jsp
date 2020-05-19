@@ -63,8 +63,8 @@
                 <h6 class="display-4">Report Crime</h6>
                 <br />
 
-                <!--Table-->
                 <div class="container-dash">
+                    <!--Form to report crimes-->
                     <form action="AddReportController" method="POST">
                         <div class="form-row">
                             <label for="crimeDescription">Description about crime</label>

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/* Used to handle registration procedure on form submit */
 public class RegisterController extends HttpServlet {
 
     @Override
@@ -39,23 +40,35 @@ public class RegisterController extends HttpServlet {
         String password = request.getParameter("password");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
+        String type = request.getParameter("type");
         String email = request.getParameter("email");
-
+        
+        //If an organization is registering the lastName field is set to "Organization"
+        
+        if (!type.equals("Individual")){
+            lastName = "(Organization)";
+        }
+        
         try {
 
             HandleUser handleUser = new HandleUser();
+            
+            //User object is created using user entered form data and this object is used to register user using handleUser object
             User user = new User(username, email, password, firstName, lastName);
             handleUser.registerUser(user);
 
         } catch (MySQLIntegrityConstraintViolationException e) {
 
+            /*If user is trying to create an account with an existing username or password MySQLIntegrityConstraintViolationException is thrown
+            from registerUser() method. It is caught here and user sent to same-account.jsp page */
+            
             System.out.println(e);
             RequestDispatcher dispatcher = request.getRequestDispatcher("util/same-account.jsp");
             dispatcher.forward(request, response);
             return;
-
         }
 
+        //After successfull registration user is sent to successful-register.jsp page
         RequestDispatcher dispatcher = request.getRequestDispatcher("util/successful-register.jsp");
         dispatcher.forward(request, response);
 

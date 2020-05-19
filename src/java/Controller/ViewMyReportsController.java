@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/* Display progress of reports made by registered users */
 public class ViewMyReportsController extends HttpServlet {
 
     @Override
@@ -37,9 +38,13 @@ public class ViewMyReportsController extends HttpServlet {
         
         HttpSession session = request.getSession();
 
+        // Call getMyReports() function on handleReport object using username taken from session data
         List<Report> myReports = handleReport.getMyReports((String) session.getAttribute("username"));
         
+        // Set list of reports taken as request attribute
         request.setAttribute("myReports", myReports);
+        
+        //forward request to user-my-reports.jsp page
         RequestDispatcher dispatcher = request.getRequestDispatcher("user-my-reports.jsp");
         dispatcher.forward(request, response);
 

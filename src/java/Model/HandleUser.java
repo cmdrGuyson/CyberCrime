@@ -14,16 +14,20 @@ public class HandleUser {
 
     public HandleUser() {
 
+        /*Make connection upon instantiation*/
         connection = Database_Connection.connectToDatabase();
 
     }
 
+    /* Method to register users */
     public void registerUser(User user) throws MySQLIntegrityConstraintViolationException {
 
         try {
 
+            /* Statement to be executed to register specific user */
             PreparedStatement statement = connection.prepareStatement("INSERT INTO user (username, email, password, firstName, lastName, dateRegistered, typeOfUser, status)" + " VALUES (?,?,?,?,?,?,?,?);");
 
+            /* customize statement according to recieved user object */
             statement.setString(1, user.getUsername());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
@@ -37,6 +41,8 @@ public class HandleUser {
 
         } catch (MySQLIntegrityConstraintViolationException e) {
             System.out.println(e);
+            
+            /* This exception will be thrown if users with same username or email exists within the system. */
             throw e;
         } catch (SQLException e) {
             System.out.println(e);
@@ -47,6 +53,7 @@ public class HandleUser {
 
         try {
 
+            /* Statement to be executed to get all users */
             PreparedStatement statement = connection.prepareStatement("SELECT username, password, status, typeOfUser FROM user");
             ResultSet results = statement.executeQuery();
 
@@ -84,6 +91,7 @@ public class HandleUser {
 
         try {
 
+            /* Statement to be executed to get a list of pending users */
             PreparedStatement statement = connection.prepareStatement("SELECT username, email, firstName, lastName, dateRegistered, status FROM user WHERE status = 'Pending';");
             ResultSet results = statement.executeQuery();
 
@@ -103,6 +111,7 @@ public class HandleUser {
         
         try {
             
+            /* Statement to be executed to update the status of specific user */
             PreparedStatement statement = connection.prepareCall("UPDATE user SET status = ? WHERE username = ?;");
             
             statement.setString(1, status);

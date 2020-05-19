@@ -20,6 +20,14 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="icon" href="images/hacker.png" />
     </head>
+    
+    <%
+        String type = (String) request.getSession().getAttribute("typeOfUser");
+
+        if (type == null) {
+
+    %>
+    
     <body>
         <!--Navigation Bar-->
 
@@ -94,7 +102,7 @@
                                 type="text"
                                 id="inputFirstName"
                                 class="form-control"
-                                placeholder="First Name"
+                                placeholder="First Name/Organization Name"
                                 name="firstName"
                                 required
                                 autofocus
@@ -107,7 +115,6 @@
                                 class="form-control"
                                 name="lastName"
                                 placeholder="Last Name"
-                                required
                                 autofocus
                                 />
                             <br />
@@ -120,6 +127,13 @@
                                 required
                                 autofocus
                                 />
+                            <br />
+                            <select id="inputType" class="form-control" required name="type">
+                                <option selected>Individual</option>
+                                <option>Organization</option>
+                            </select>
+                            <br />
+                            <p>If registering an organization please leave Last name empty</p>
                             <br />
                             <br />
 
@@ -140,9 +154,16 @@
                 </div>
             </div>
         </div>
-        
+
         <%@ include file="util/footer.html" %>
 
     </body>
+    
+    <%    } else {
+
+            RequestDispatcher dispatcher = request.getRequestDispatcher("SendHomeController");
+            dispatcher.forward(request, response);
+        }
+    %>
 
 </html>

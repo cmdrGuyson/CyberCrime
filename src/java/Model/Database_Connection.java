@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 public class Database_Connection {
 
+    
+    /* To connect to the database */
     public static Connection connectToDatabase() {
 
         /*Credentials*/
@@ -26,6 +28,7 @@ public class Database_Connection {
         }
     }
 
+    /* To disconnect from the database */
     public static void disconnectFromDatabase(Connection connection) {
 
         try {

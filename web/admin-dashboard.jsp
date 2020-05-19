@@ -77,62 +77,64 @@
             <br /><br />
 
 
-            <!--Table-->
+            
             <div class="row dash-row">
                 <div class="container-dash">
                     
-                    <table class="table table-striped">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th width="10%" scope="col">Report ID</th>
-                                <th width="10%" scope="col">Username</th>
-                                <th width="10%" scope="col">Full Name</th>
-                                <th width="10%" scope="col">Email</th>
-                                <th width="10%" scope="col">Date Of Crime</th>
-                                <th width="10%" scope="col">Reported Date</th>
-                                <th width="10%" scope="col">Type</th>
-                                <th width="50%" scope="col">Description</th>
-                                <th width="10%" scope="col">Status</th>
-                            </tr>
-                        </thead>
-                        
-                        <tbody>
-                            
-                            <c:forEach var="report" items="${pendingReports}">
-                            
-
-                                <c:url var="accept" value="UpdateReportStatusController">
-                                    <c:param name="status" value="In-progress"/> 
-                                    <c:param name="reportID" value="${report.getReportID()}"/>
-                                </c:url>
-
-                                <c:url var="decline" value="UpdateReportStatusController">
-                                    <c:param name="status" value="Rejected"/> 
-                                    <c:param name="reportID" value="${report.getReportID()}"/>
-                                </c:url>
-
+                        <!--Table to display pending users -->
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
                                 <tr>
-                                    <th scope="row">${report.getReportID()}</th>
-                                    <td>${report.getUsername()}</td>
-                                    <td>${report.getFullName()}</td>
-                                    <td>${report.getEmail()}</td>
-                                    <td>${report.getEstimatedDateOfCrime()}</td>
-                                    <td>${report.getReportedDate()}</td>
-                                    <td>${report.getTypeOfCrime()}</td>
-                                    <td>${report.getDescription()}</td>
-                                    <td>${report.getStatus()}</td>
-                                    <td>
-                                        <a href="${accept}" data-toggle="tooltip" title="Accept">
-                                            <i class="fas fa-check-circle"></i>
-                                        </a>
-                                        <a href="${decline}" data-toggle="tooltip" title="Decline">
-                                            <i class="fas fa-ban"></i>
-                                        </a>
-                                    </td>
+                                    <th width="10%" scope="col">Report ID</th>
+                                    <th width="10%" scope="col">Username</th>
+                                    <th width="10%" scope="col">Full Name</th>
+                                    <th width="10%" scope="col">Email</th>
+                                    <th width="10%" scope="col">Date Of Crime</th>
+                                    <th width="10%" scope="col">Reported Date</th>
+                                    <th width="10%" scope="col">Type</th>
+                                    <th width="50%" scope="col">Description</th>
+                                    <th width="10%" scope="col">Status</th>
                                 </tr>
-                            </c:forEach>
-                        </tbody>
-                    </table>
+                            </thead>
+
+                            <tbody>
+
+                                <c:forEach var="report" items="${pendingReports}">
+
+                                    <!-- When clicked on accept report set status parameter to in-progress and set reportID -->
+                                    <c:url var="accept" value="UpdateReportStatusController">
+                                        <c:param name="status" value="In-progress"/> 
+                                        <c:param name="reportID" value="${report.getReportID()}"/>
+                                    </c:url>
+
+                                    <!-- When clicked on discard report set status parameter to rejected and set reportID -->
+                                    <c:url var="decline" value="UpdateReportStatusController">
+                                        <c:param name="status" value="Rejected"/> 
+                                        <c:param name="reportID" value="${report.getReportID()}"/>
+                                    </c:url>
+
+                                    <tr>
+                                        <th scope="row">${report.getReportID()}</th>
+                                        <td>${report.getUsername()}</td>
+                                        <td>${report.getFullName()}</td>
+                                        <td>${report.getEmail()}</td>
+                                        <td>${report.getEstimatedDateOfCrime()}</td>
+                                        <td>${report.getReportedDate()}</td>
+                                        <td>${report.getTypeOfCrime()}</td>
+                                        <td>${report.getDescription()}</td>
+                                        <td>${report.getStatus()}</td>
+                                        <td>
+                                            <a href="${accept}" data-toggle="tooltip" title="Accept">
+                                                <i class="fas fa-check-circle"></i>
+                                            </a>
+                                            <a href="${decline}" data-toggle="tooltip" title="Decline">
+                                                <i class="fas fa-ban"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                 </div>
             </div>
         </div>

@@ -17,6 +17,7 @@ public class HandleReport {
 
     public HandleReport() {
 
+        /*Make connection upon instantiation*/
         connection = Database_Connection.connectToDatabase();
     }
 
@@ -25,6 +26,7 @@ public class HandleReport {
 
         try {
 
+            /* Statement to be executed to add a report to the database */
             PreparedStatement statement = connection.prepareStatement("INSERT INTO report (username, description, typeOfCrime, estimatedDateOfCrime, reportedDate, status)" + " VALUES (?,?,?,?,?,?);");
 
             statement.setString(1, report.getUsername());
@@ -48,17 +50,20 @@ public class HandleReport {
 
         try {
 
+            /* Statement to be executed to get reports from the database with specified status */
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM report WHERE status = ?;");
             statement.setString(1, status);
             ResultSet results = statement.executeQuery();
 
             while (results.next()) {
 
+                /* Statement to be executed to get user information as per report */
                 PreparedStatement newStatement = connection.prepareStatement("SELECT firstName, lastName, email FROM user WHERE username = ?;");
                 newStatement.setString(1, results.getString("username"));
                 ResultSet newResults = newStatement.executeQuery();
 
                 while (newResults.next()) {
+                    // For each result returned make a new report object and add to reports list
                     Report report = new Report(results.getInt("reportID"), results.getString("description"), results.getString("typeOfCrime"), results.getString("status"), results.getString("username"), results.getString("estimatedDateOfCrime"), (newResults.getString("firstName") + " " + newResults.getString("lastName")), newResults.getString("email"), results.getString("reportedDate"));
                     reports.add(report);
                 }
@@ -78,12 +83,14 @@ public class HandleReport {
 
         try {
 
+            /* Statement to be executed to get all reports addressed by a specified officer */
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM report WHERE handledOfficer = ?;");
             statement.setString(1, handledOfficer);
             ResultSet results = statement.executeQuery();
 
             while (results.next()) {
 
+                /* Statement to be executed to get user information as per report */
                 PreparedStatement newStatement = connection.prepareStatement("SELECT firstName, lastName, email FROM user WHERE username = ?;");
                 newStatement.setString(1, results.getString("username"));
                 ResultSet newResults = newStatement.executeQuery();
@@ -108,6 +115,7 @@ public class HandleReport {
 
         try {
 
+            /* Statement to be executed to get a specified users reports */
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM report WHERE username = ?;");
             statement.setString(1, username);
             ResultSet results = statement.executeQuery();
@@ -131,7 +139,8 @@ public class HandleReport {
 
         try {
 
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM report WHERE status IN ('Insufficient Data', 'Recovered');");
+            /* Statement to be executed to get all published reports */
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM report WHERE status = 'Recovered';");
             ResultSet results = statement.executeQuery();
 
             while (results.next()) {
@@ -152,6 +161,7 @@ public class HandleReport {
 
         try {
 
+            /* Statement to be executed to change the status of a specified report */
             PreparedStatement statement = connection.prepareStatement("UPDATE report SET status = ? WHERE reportID = ?;");
 
             statement.setString(1, status);
@@ -169,6 +179,7 @@ public class HandleReport {
 
         try {
 
+            /* Statement to be executed to address a specified report */
             PreparedStatement statement = connection.prepareStatement("UPDATE report SET status = ?, response = ?, handledOfficer = ? WHERE reportID = ?;");
 
             statement.setString(1, report.getStatus());
@@ -196,8 +207,8 @@ public class HandleReport {
 
         try {
 
-            //Searching through description
-            PreparedStatement statementA = connection.prepareStatement("SELECT * FROM report WHERE description REGEXP ? AND status IN ('Insufficient Data', 'Recovered');");
+            //Searching through description for reports that have been recovered
+            PreparedStatement statementA = connection.prepareStatement("SELECT * FROM report WHERE description REGEXP ? AND status = 'Recovered';");
             statementA.setString(1, searchExpression);
 
             ResultSet resultsA = statementA.executeQuery();
@@ -208,7 +219,7 @@ public class HandleReport {
             }
 
             //Searching through typeOfCrime
-            PreparedStatement statementB = connection.prepareStatement("SELECT * FROM report WHERE typeOfCrime REGEXP ? AND status IN ('Insufficient Data', 'Recovered');");
+            PreparedStatement statementB = connection.prepareStatement("SELECT * FROM report WHERE typeOfCrime REGEXP ? AND status = 'Recovered';");
             statementB.setString(1, searchExpression);
 
             ResultSet resultsB = statementB.executeQuery();
@@ -219,7 +230,7 @@ public class HandleReport {
             }
 
             //Searching through response
-            PreparedStatement statementC = connection.prepareStatement("SELECT * FROM report WHERE response REGEXP ? AND status IN ('Insufficient Data', 'Recovered');");
+            PreparedStatement statementC = connection.prepareStatement("SELECT * FROM report WHERE response REGEXP ? AND status IN = 'Recovered';");
             statementC.setString(1, searchExpression);
 
             ResultSet resultsC = statementC.executeQuery();
@@ -229,11 +240,79 @@ public class HandleReport {
                 reports.add(report);
             }
 
-            //Removing duplicates from list
+            //Removing duplicates from list by comparing reportIDs and creating a tree set
             List<Report> unique = reports.stream().collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparingInt(Report::getReportID))), ArrayList::new));
 
             reports = unique;
-            
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+
+        return reports;
+    }
+
+
+    /* ALLOW OFFICER TO SEARCH FOR REPORTS TO BE ADDRESSED */
+    public List<Report> searchReportsOfficer(String searchString) {
+
+        List<Report> reports = new ArrayList<>();
+
+        //searchString is broken into keywords by whitespaces.
+        String[] keywords = searchString.trim().split("\\s+");
+
+        //creating a REGEXP that can be used to query.
+        String searchExpression = String.join("|", keywords);
+
+        try {
+
+            //Searching through description
+            PreparedStatement statementA = connection.prepareStatement("SELECT * FROM report WHERE description REGEXP ? AND status IN ('In-progress');");
+            statementA.setString(1, searchExpression);
+
+            ResultSet resultsA = statementA.executeQuery();
+
+            while (resultsA.next()) {
+                
+                //Prepared statement to get user details based on username foreign key
+                PreparedStatement newStatement = connection.prepareStatement("SELECT firstName, lastName, email FROM user WHERE username = ?;");
+                newStatement.setString(1, resultsA.getString("username"));
+                ResultSet newResults = newStatement.executeQuery();
+
+                while (newResults.next()) {
+                    
+                    //Get report data and user data to construct report object added to reports list
+                    Report report = new Report(resultsA.getInt("reportID"), resultsA.getString("description"), resultsA.getString("typeOfCrime"), resultsA.getString("status"), resultsA.getString("response"), resultsA.getString("handledOfficer"), resultsA.getString("username"),resultsA.getString("reportedDate"), resultsA.getString("estimatedDateOfCrime"), (newResults.getString("firstName") + " " + newResults.getString("lastName")), newResults.getString("email"));
+                    reports.add(report);
+                }
+            }
+
+            //Searching through typeOfCrime
+            PreparedStatement statementB = connection.prepareStatement("SELECT * FROM report WHERE typeOfCrime REGEXP ? AND status IN ('In-progress');");
+            statementB.setString(1, searchExpression);
+
+            ResultSet resultsB = statementB.executeQuery();
+
+            while (resultsB.next()) {
+                
+                //Prepared statement to get user details based on username foreign key
+                PreparedStatement newStatement = connection.prepareStatement("SELECT firstName, lastName, email FROM user WHERE username = ?;");
+                newStatement.setString(1, resultsB.getString("username"));
+                ResultSet newResults = newStatement.executeQuery();
+
+                while (newResults.next()) {
+                    
+                    //Get report data and user data to construct report object added to reports list
+                    Report report = new Report(resultsB.getInt("reportID"), resultsB.getString("description"), resultsB.getString("typeOfCrime"), resultsB.getString("status"), resultsB.getString("response"), resultsB.getString("handledOfficer"), resultsB.getString("username"),resultsB.getString("reportedDate"), resultsB.getString("estimatedDateOfCrime"), (newResults.getString("firstName") + " " + newResults.getString("lastName")), newResults.getString("email"));
+                    reports.add(report);
+                }
+            }
+
+            //Removing duplicates from list by comparing reportIDs and creating a tree set
+            List<Report> unique = reports.stream().collect(collectingAndThen(toCollection(() -> new TreeSet<>(comparingInt(Report::getReportID))), ArrayList::new));
+
+            reports = unique;
+
         } catch (SQLException e) {
             System.out.println(e);
         }
