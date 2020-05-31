@@ -22,8 +22,15 @@
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
             crossorigin="anonymous"
             />
+        <link rel="stylesheet" type="text/css" href="css/additional.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="icon" href="images/hacker.png" />
+        <style>
+            body {background-image: url("images/storyboard.gif");
+                  background-repeat: no-repeat;
+                  background-position: center bottom;
+            }
+        </style>
     </head>
 
     <body>

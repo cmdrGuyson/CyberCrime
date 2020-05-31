@@ -24,6 +24,12 @@
             />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="icon" href="images/hacker.png" />
+        <style>
+            body {background-image: url("images/register-hacker.png");
+                  background-repeat: no-repeat;
+                  background-position: right bottom;
+            }
+        </style>
     </head>
 
     <body>

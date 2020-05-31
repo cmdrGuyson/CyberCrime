@@ -35,3 +35,5 @@ CREATE TABLE Report(
 SELECT * FROM user;
 
 INSERT INTO user VALUES ('admin', 'admin@email.com', 'password', 'Jason', 'Segal', '2020-04-01', 'admin', 'Active');
+INSERT INTO user VALUES ('officer', 'officer@email.com', 'password', 'Sasha', 'Grey', '2020-04-01', 'officer', 'Active');
+INSERT INTO user VALUES ('guyson', 'guyson@email.com', 'password', 'Gayanga', 'Kuruppu', '2020-04-01', 'user', 'Active');

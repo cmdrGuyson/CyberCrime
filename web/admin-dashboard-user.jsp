@@ -22,9 +22,16 @@
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
             crossorigin="anonymous"
             />
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        
         <link rel="stylesheet" type="text/css" href="css/additional.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="icon" href="images/hacker.png" />
+        <style>
+            body {background-image: url("images/paper-plane.gif"), url("images/register-hacker.png");
+                  background-repeat: no-repeat, no-repeat;
+                  background-position: left top, right bottom;
+            }
+        </style>
     </head>
 
     <%
@@ -70,7 +77,7 @@
             <br />
 
             <a
-                class="btn btn-outline-warning my-2 my-sm-0" href="ViewPendingReportsController"
+                class="btn btn-outline-warning btnWhite my-2 my-sm-0" href="ViewPendingReportsController"
                 >
                 Pending Reports
             </a>

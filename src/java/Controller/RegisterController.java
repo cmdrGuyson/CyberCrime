@@ -24,29 +24,26 @@ public class RegisterController extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-
             registerUser(request, response);
-
         } catch (SQLException e) {
-
             System.out.println(e);
         }
-
     }
 
     private void registerUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 
+        // Get data from request parameters
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String type = request.getParameter("type");
         String email = request.getParameter("email");
+        String organizationName = request.getParameter("organizationName");
         
-        //If an organization is registering the lastName field is set to "Organization"
-        
+        //If an organization is registering the organization name will be added within brackets to the last name of the HR-Manager
         if (!type.equals("Individual")){
-            lastName = "(Organization)";
+            lastName += " ("+organizationName+")";
         }
         
         try {
@@ -71,7 +68,6 @@ public class RegisterController extends HttpServlet {
         //After successfull registration user is sent to successful-register.jsp page
         RequestDispatcher dispatcher = request.getRequestDispatcher("util/successful-register.jsp");
         dispatcher.forward(request, response);
-
     }
 
     @Override

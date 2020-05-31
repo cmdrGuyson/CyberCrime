@@ -20,14 +20,14 @@
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="icon" href="images/hacker.png" />
     </head>
-    
+
     <%
         String type = (String) request.getSession().getAttribute("typeOfUser");
 
         if (type == null) {
 
     %>
-    
+
     <body>
         <!--Navigation Bar-->
 
@@ -102,7 +102,7 @@
                                 type="text"
                                 id="inputFirstName"
                                 class="form-control"
-                                placeholder="First Name/Organization Name"
+                                placeholder="First Name"
                                 name="firstName"
                                 required
                                 autofocus
@@ -118,6 +118,16 @@
                                 autofocus
                                 />
                             <br />
+                            <label for="inputOrganizationName" class="sr-only organization-hidden">Organization Name</label>
+                            <input
+                                type="text"
+                                id="inputOrganizationName"
+                                class="form-control organization-hidden"
+                                name="organizationName"
+                                placeholder="Organization Name"
+                                autofocus
+                                />
+                            <br />
                             <input
                                 type="email"
                                 id="inputEmail"
@@ -128,7 +138,7 @@
                                 autofocus
                                 />
                             <br />
-                            <select id="inputType" class="form-control" required name="type">
+                            <select id="inputType" class="form-control" required name="type" onchange="hide()">
                                 <option selected>Individual</option>
                                 <option>Organization</option>
                             </select>
@@ -158,7 +168,31 @@
         <%@ include file="util/footer.html" %>
 
     </body>
-    
+
+    <script>
+        //Hide Organization field after page loads
+        document.getElementById("inputOrganizationName").style.display = 'none';
+        
+        //Script to change register form based on type of user
+        function hide() {
+            var e = document.getElementById("inputType");
+            var type = e.options[e.selectedIndex].value;
+            
+            
+            if(type === "Organization") {
+                // If its an organization change first name and last name input field placeholders and show organization name field
+                document.getElementById("inputOrganizationName").style.display = 'block';
+                document.getElementById('inputFirstName').placeholder='HR-Manager First Name'
+                document.getElementById('inputLastName').placeholder='HR-Manager Last Name'
+            }else{
+                // If its not an organization change hr-manager first name and last name input field placeholders and hide organization name field
+                document.getElementById("inputOrganizationName").style.display = 'none';
+                document.getElementById('inputFirstName').placeholder='First Name'
+                document.getElementById('inputLastName').placeholder='Last Name'
+            }
+        }
+    </script>
+
     <%    } else {
 
             RequestDispatcher dispatcher = request.getRequestDispatcher("SendHomeController");

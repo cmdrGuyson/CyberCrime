@@ -17,10 +17,10 @@ public class User {
         this.typeOfUser = "user";
         this.status = "Pending";
         
-        /* Create a date formatter to convert java data to SQL friendly date */
+        /* Create a date formatter to convert java date to SQL friendly date */
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         
-        /* Set date registered date to the present date */
+        /* Set date registered date to the present date after converting to simple date format */
         this.dateRegistered = formatter.format(new Date());
     }
      

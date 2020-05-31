@@ -230,7 +230,7 @@ public class HandleReport {
             }
 
             //Searching through response
-            PreparedStatement statementC = connection.prepareStatement("SELECT * FROM report WHERE response REGEXP ? AND status IN = 'Recovered';");
+            PreparedStatement statementC = connection.prepareStatement("SELECT * FROM report WHERE response REGEXP ? AND status = 'Recovered';");
             statementC.setString(1, searchExpression);
 
             ResultSet resultsC = statementC.executeQuery();
@@ -273,16 +273,16 @@ public class HandleReport {
             ResultSet resultsA = statementA.executeQuery();
 
             while (resultsA.next()) {
-                
+
                 //Prepared statement to get user details based on username foreign key
                 PreparedStatement newStatement = connection.prepareStatement("SELECT firstName, lastName, email FROM user WHERE username = ?;");
                 newStatement.setString(1, resultsA.getString("username"));
                 ResultSet newResults = newStatement.executeQuery();
 
                 while (newResults.next()) {
-                    
+
                     //Get report data and user data to construct report object added to reports list
-                    Report report = new Report(resultsA.getInt("reportID"), resultsA.getString("description"), resultsA.getString("typeOfCrime"), resultsA.getString("status"), resultsA.getString("response"), resultsA.getString("handledOfficer"), resultsA.getString("username"),resultsA.getString("reportedDate"), resultsA.getString("estimatedDateOfCrime"), (newResults.getString("firstName") + " " + newResults.getString("lastName")), newResults.getString("email"));
+                    Report report = new Report(resultsA.getInt("reportID"), resultsA.getString("description"), resultsA.getString("typeOfCrime"), resultsA.getString("status"), resultsA.getString("response"), resultsA.getString("handledOfficer"), resultsA.getString("username"), resultsA.getString("estimatedDateOfCrime"), resultsA.getString("reportedDate"), (newResults.getString("firstName") + " " + newResults.getString("lastName")), newResults.getString("email"));
                     reports.add(report);
                 }
             }
@@ -294,16 +294,16 @@ public class HandleReport {
             ResultSet resultsB = statementB.executeQuery();
 
             while (resultsB.next()) {
-                
+
                 //Prepared statement to get user details based on username foreign key
                 PreparedStatement newStatement = connection.prepareStatement("SELECT firstName, lastName, email FROM user WHERE username = ?;");
                 newStatement.setString(1, resultsB.getString("username"));
                 ResultSet newResults = newStatement.executeQuery();
 
                 while (newResults.next()) {
-                    
+
                     //Get report data and user data to construct report object added to reports list
-                    Report report = new Report(resultsB.getInt("reportID"), resultsB.getString("description"), resultsB.getString("typeOfCrime"), resultsB.getString("status"), resultsB.getString("response"), resultsB.getString("handledOfficer"), resultsB.getString("username"),resultsB.getString("reportedDate"), resultsB.getString("estimatedDateOfCrime"), (newResults.getString("firstName") + " " + newResults.getString("lastName")), newResults.getString("email"));
+                    Report report = new Report(resultsB.getInt("reportID"), resultsB.getString("description"), resultsB.getString("typeOfCrime"), resultsB.getString("status"), resultsB.getString("response"), resultsB.getString("handledOfficer"), resultsB.getString("username"), resultsB.getString("estimatedDateOfCrime"), resultsB.getString("reportedDate"), (newResults.getString("firstName") + " " + newResults.getString("lastName")), newResults.getString("email"));
                     reports.add(report);
                 }
             }

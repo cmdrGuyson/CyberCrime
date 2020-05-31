@@ -62,8 +62,10 @@ public class HandleUser {
                 /* GETTING USER CREDECTIALS FROM DATABSE AND CREATING NEW USER OBJECT TO STORE DATA */
                 User selectedUser = new User(results.getString("username"), results.getString("password"), results.getString("typeOfUser"), results.getString("status"));
 
+                // If the user exists on the database
                 if (user.getUsername().equals(selectedUser.getUsername()) && user.getPassword().equals(selectedUser.getPassword())) {
 
+                    //According to the type of user return the user type as string
                     if (selectedUser.getTypeOfUser().equals("admin")) {
                         return "admin";
                     } else if (selectedUser.getTypeOfUser().equals("officer")) {
@@ -82,6 +84,7 @@ public class HandleUser {
             System.out.println(e);
         }
 
+        // If user is not found return "invalid"
         return "invalid";
     }
 
@@ -96,7 +99,8 @@ public class HandleUser {
             ResultSet results = statement.executeQuery();
 
             while (results.next()) {
-
+                
+                //Create new user object for each user retrieved and add to list
                 User user = new User(results.getString("username"), results.getString("email"), results.getString("firstName"), results.getString("lastName"), results.getString("status"), results.getString("dateRegistered"));
                 pendingUsers.add(user);
             }
@@ -122,6 +126,5 @@ public class HandleUser {
         }catch(SQLException e){
             System.out.println(e);
         }   
-        
     }
 }

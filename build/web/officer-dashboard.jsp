@@ -22,8 +22,16 @@
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
             crossorigin="anonymous"
             />
+        
+        <link rel="stylesheet" type="text/css" href="css/additional.css" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="icon" href="images/hacker.png" />
+        <style>
+            body {background-image: url("images/paper-plane.gif"), url("images/register-hacker.png");
+                  background-repeat: no-repeat, no-repeat;
+                  background-position: left top, right bottom;
+            }
+        </style>
     </head>
 
     <%
@@ -66,7 +74,7 @@
 
         <div class="container content">
             <h6 class="display-4">Reports to be Addressed</h6>
-            
+
             <br />
 
             <form class="form-inline" method="GET" action="SearchAcceptedReportsController">
@@ -78,7 +86,7 @@
                     name="searchString"
                     required
                     />
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                <button class="btn btn-outline-success btnWhite my-2 my-sm-0" type="submit">
                     Search
                 </button>
             </form>
@@ -86,7 +94,7 @@
             <br />
 
             <a
-                class="btn btn-outline-warning my-2 my-sm-0" href="ViewMyAddressedReportsController"
+                class="btn btn-outline-warning btnWhite my-2 my-sm-0" href="ViewMyAddressedReportsController"
                 >
                 My Addressed Reports
             </a>
@@ -199,6 +207,7 @@
                 </div>
 
             </div>
+
         </div>
 
         <%@ include file="util/footer.html" %>

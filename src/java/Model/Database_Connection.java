@@ -18,11 +18,15 @@ public class Database_Connection {
         try {
 
             Class.forName("com.mysql.jdbc.Driver");
+            // New connection is made to the database.
             Connection connection = DriverManager.getConnection(URL, username, password);
+            
+            // The connection is return
             return connection;
 
         } catch (ClassNotFoundException | SQLException e) {
 
+            // Any errors are caught and displayed
             System.out.println(e);
             return null;
         }
@@ -33,6 +37,7 @@ public class Database_Connection {
 
         try {
 
+            // Connection is closed
             connection.close();
 
         } catch (SQLException e) {
